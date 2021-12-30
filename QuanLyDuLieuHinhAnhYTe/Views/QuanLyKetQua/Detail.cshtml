@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detail</h2>
+<table class="table table-bordered table-responsive table-hover table-striped" ng-app="AppKetQuaModule" ng-controller="DetailController">
+    <thead class="text-center">
+        <tr>
+            <th scope="col">STT</th>
+            <th scope="col">Mã - Họ tên bệnh nhân</th>
+            <th scope="col">Lần chụp</th>
+            <th scope="col">Hình Ảnh</th>
+            <th scope="col">Mục đích</th>
+            <th scope="col">Kỹ thuật</th>
+            <th scope="col">Kết Luận</th>
+          
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="b in ListKetQua" >
+            <td>{{$index + 1}}</td>
+            <td>{{b.MaBenhNhan}} - {{b.HoTen}}</td>
+            <td>{{b.LanChup}}</td>
+            <td><img src="~/img/KetQua/{{b.HinhAnh}}" width="150px" height="150px" /></td>
+            <td>{{b.MucDich}}</td>
+            <td>{{b.KyThuat}}</td>
+            <td>{{b.KetLuan}}</td>
+           
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td align="center" colspan="17">
+                <span class="form-group pull-left page-size form-inline">
+                    <select id="ddlPageSize" class="form-control control-color"
+                            ng-model="pageSizeSelected"
+                            ng-change="changePageSize()">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                    </select>
+                </span>
+                <div class="pull-right">
+                    <pagination total-items="totalCount" ng-change="pageChanged()" items-per-page="pageSizeSelected" direction-links="true" ng-model="pageIndex" max-size="maxSize" class="pagination" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
+                    <a class="btn btn-primary">Page: {{pageIndex}} / {{numPages}}</a>
+                </div>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+

@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Insert";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div ng-app="AppModule" ng-controller="BenhNhanController">
+    <h2>Thêm bệnh nhân</h2>
+    <div class="form-group">
+        <form>
+            <label for="name">Họ tên</label>
+            <input ng-model="b.HoTen" type="text" id="name" class="form-control">
+
+            <label for="date">Năm sinh</label>
+            <input ng-model="b.NamSinh" type="date" id="date" class="form-control" name="" placeholder="">
+            <label for="">Giới tính</label>
+            <select ng-model="b.GioiTinh" class="form-control" name="" id="">
+                <option value="Nam">Nam</option>
+                <option value="Nữ">Nữ</option>
+            </select>
+            <label for="">Dân tộc</label>
+            <input ng-model="b.DanToc" type="text" id="DanToc" class="form-control" name="" placeholder="">
+            <label for="">Mã số BHXH - BHYT</label>
+            <input ng-model="b.MaSoBHXH_BHYT" type="text" id="MaSoBHXH_BHYT" class="form-control" name="" placeholder="">
+            <label for="">Đơn vị công tác</label>
+            <input ng-model="b.DonViCongTac" type="text" id="DonViCongtac" class="form-control" name="" placeholder="">
+            <label for="">Địa chỉ</label>
+            <input ng-model="b.DiaChi" type="text" id="DiaChi" class="form-control" name="" placeholder="">
+            <label for="">Vào viện</label>
+            <input ng-model="b.VaoVien" type="date" id="VaoVien" class="form-control" name="" placeholder="">
+            <label for="">Ra viện</label>
+            <input ng-model="b.RaVien" type="date" id="RaVien" class="form-control" name="" placeholder="">
+            <label for="">Chẩn đoán vào viện</label>
+            <input ng-model="b.ChanDoanVaoVien" type="text" id="ChanDoanVaoVien" class="form-control" name="" placeholder="">
+            <label for="">Chẩn đoán ra viện</label>
+            <input ng-model="b.ChanDoanRaVien" type="text" id="ChanDoanRaVien" class="form-control" name="" placeholder="">
+            <label for="">Tóm tắt bệnh án</label>
+            <textarea ng-model="b.TomTatBenhAn" type="text" id="TomTatBenhAn" class="form-control" name="" placeholder=""></textarea>
+            <label for="image">Hình ảnh</label>
+            <input ng-model="b.HinhAnh" multiple="multiple" type="file" id="image" class="form-control" ngf-select="UploadFiles($files)">
+            <label for="">Ghi chú</label>
+            <input ng-model="b.GhiChu" type="text" id="GhiChu" class="form-control" name="" placeholder="">
+        </form>
+    </div>
+    <div>
+        <button ng-click="Save()" type="button" class="btn btn-primary">Thêm mới</button>
+        <a class="btn btn-success" href="/QuanLyBenhNhan/Index" >Tất cả Bệnh nhân</a>
+    </div>
+</div>
+
+

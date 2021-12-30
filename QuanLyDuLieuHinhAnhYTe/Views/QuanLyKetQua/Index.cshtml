@@ -1,0 +1,123 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/ng-file-upload.min.js"></script>
+<script src="~/Scripts/dirPagination.js"></script>
+
+<div ng-app="AppKetQuaModule" ng-controller="KetQuaController">
+    <h2>Quản lý kết quả bệnh nhân</h2>
+    <div class="panel-body">
+        <form action="" method="get">
+            <div class="row form-group">
+                <div class="col-lg-12">
+                    <div class="col-md-4">
+                        <input type="text" ng-model="searchText" class="form-control">
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" ng-click="Search(TenSP)" class="btn btn-success">Tìm kiếm</button>
+
+                        <a class="btn btn-primary" href="/QuanLyKetQua/Insert">
+                            Thêm mới
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <table class="table table-bordered table-responsive table-hover table-striped">
+        <thead class="text-center">
+            <tr>
+                <th scope="col">STT</th>
+                <th scope="col">Mã - Họ tên bệnh nhân</th>
+                <th scope="col">Lần chụp</th>
+                <th scope="col">Hình Ảnh</th>
+                <th scope="col">Mục đích</th>
+                <th scope="col">Kỹ thuật</th>
+                <th scope="col">Kết Luận</th>
+                <th scope="col" colspan="2">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="b in ListKetQua | filter: searchText" total-items="totalCount">
+                <td>{{$index + 1}}</td>
+                <td>
+                    <a href="/QuanLyKetQua/Detail?maBenhNhan={{b.MaBenhNhan}}" title="{{b.HoTen}}">{{b.MaBenhNhan}} - {{b.HoTen}}</a>
+                </td>
+                <td>{{b.LanChup}}</td>
+                <td><img src="~/img/KetQua/{{b.HinhAnh}}" width="150px" height="150px" /></td>
+                <td>{{b.MucDich}}</td>
+                <td>{{b.KyThuat}}</td>
+                <td>{{b.KetLuan}}</td>
+                <td>
+                    <button class="btn btn-success btn-sm" ng-click="Sua(b)" data-toggle="modal" data-target="#modelId">Sửa</button>
+                </td>
+                <td>
+                    <button class="btn btn-success btn-sm" ng-click="XoaKetQua(b)">Xóa</button>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td align="center" colspan="17">
+                    <span class="form-group pull-left page-size form-inline">
+                        <select id="ddlPageSize" class="form-control control-color"
+                                ng-model="pageSizeSelected"
+                                ng-change="changePageSize()">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                        </select>
+                    </span>
+                    <div class="pull-right">
+                        <pagination total-items="totalCount" ng-change="pageChanged()" items-per-page="pageSizeSelected" direction-links="true" ng-model="pageIndex" max-size="maxSize" class="pagination" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
+                        <a class="btn btn-primary">Page: {{pageIndex}} / {{numPages}}</a>
+                    </div>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Sửa kết quả</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name">Mã bệnh nhân - Họ tên</label>
+                        <select ng-model="b.MaBenhNhan" class="form-control" name="" id="">
+                            <option ng-repeat="b in listBenhNhan" value="{{b.MaBenhNhan}}">{{b.MaBenhNhan}} - {{b.HoTen}}</option>
+                        </select>
+                        <label for="number">Lần chụp</label>
+                        <input ng-model="b.LanChup" type="number" id="number" class="form-control" name="" placeholder="">
+                        <label for="image">Hình ảnh</label>
+                        <input ng-model="b.HinhAnh" multiple="multiple" type="file" id="image" class="form-control" ngf-select="UploadFiles($files)">
+                        <label for="MucDich">Mục đích</label>
+                        <input ng-model="b.MucDich" type="text" id="MucDich" class="form-control" name="" placeholder="">
+                        <label for="KyThuat">Kỹ thuật</label>
+                        <input ng-model="b.KyThuat" type="text" id="KyThuat" class="form-control" name="" placeholder="">
+                        <label for="KetLuan">Kết luận</label>
+                        <input ng-model="b.KetLuan" type="text" id="KetLuan" class="form-control" name="" placeholder="">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button ng-click="Update()" type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End Modal-->
+</div>
+
+
+

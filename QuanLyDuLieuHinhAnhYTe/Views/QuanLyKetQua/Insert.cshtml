@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Insert";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div ng-app="AppKetQuaModule" ng-controller="KetQuaController">
+    <h2>Thêm kết quả</h2>
+    <div class="form-group">
+        <label for="name">Mã bệnh nhân - Họ tên</label>
+        <select ng-model="b.MaBenhNhan" class="form-control" name="" id="">
+            <option ng-repeat="b in listBenhNhan" value="{{b.MaBenhNhan}}">{{b.MaBenhNhan}} - {{b.HoTen}}</option>
+        </select>
+        <label for="number">Lần chụp</label>
+        <input ng-model="b.LanChup" type="number" id="number" class="form-control" name="" placeholder="">
+        <label for="image">Hình ảnh</label>
+        <input ng-model="b.HinhAnh" multiple="multiple" type="file" id="image" class="form-control" ngf-select="UploadFiles($files)">
+        <label for="MucDich">Mục đích</label>
+        <input ng-model="b.MucDich" type="text" id="MucDich" class="form-control" name="" placeholder="">
+        <label for="KyThuat">Kỹ thuật</label>
+        <input ng-model="b.KyThuat" type="text" id="KyThuat" class="form-control" name="" placeholder="">
+        <label for="KetLuan">Kết luận</label>
+        <input ng-model="b.KetLuan" type="text" id="KetLuan" class="form-control" name="" placeholder="">
+    </div>
+    <div>
+        <button ng-click="Save()" type="button" class="btn btn-primary">Thêm mới</button>
+        <a class="btn btn-success" href="/QuanLyKetQua/Index">Tất cả Kết quả</a>
+    </div>
+</div>
+
+
+
